@@ -26,7 +26,7 @@ const userSchema = (sequelize, DataTypes) => {
       let hashedPass = await bcrypt.hash(user.password, 10);
       user.password = hashedPass;
     } catch (err) {
-      
+
       throw err;
     }
   });

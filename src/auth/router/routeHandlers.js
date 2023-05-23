@@ -57,7 +57,7 @@ async function handleGetUsers(req, res, next) {
 // Handle request to secret area
 function handleSecret(req, res, next) {
   res.status(200).send("Welcome to the secret area!");
-}
+} 
 
 module.exports = {
   handleSignin,

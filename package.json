@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production&& nodemon index.js",
+    "start": "node index.js",
     "dev": "cross-env NODE_ENV=development&& nodemon index.js",
     "init:config": "sequelize init:config",
     "db:create": "sequelize db:create",
@@ -16,7 +16,7 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "author": "",
+  "author": "Reed Vogt",
   "license": "ISC",
   "dependencies": {
     "base-64": "^1.0.0",
