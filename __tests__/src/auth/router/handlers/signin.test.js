@@ -2,8 +2,8 @@
 
 process.env.SECRET = "TEST_SECRET";
 
-const { db, users } = require('../../../src/auth/models');
-const { handleSignin } = require('../../../src/auth/router/routeHandlers.js');
+const { db, users } = require('../../../../../src/auth/models');
+const { handleSignin } = require('../../../../../src/auth/router/routeHandlers.js');
 
 beforeAll(async () => {
   await db.sync();
