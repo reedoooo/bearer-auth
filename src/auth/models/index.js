@@ -10,15 +10,15 @@ const userSchema = require('./users.js');
 const DATABASE_URL = process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development' ? 'sqlite::memory' : process.env.DATABASE_URL;
 
 // Define database configuration object, which will be used to configure the Sequelize instance
-const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
-  // dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    }
-  }
-} : {};
+// const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
+//   // dialect: 'postgres',
+//   dialectOptions: {
+//     ssl: {
+//       require: true,
+//       rejectUnauthorized: false,
+//     }
+//   }
+// } : {};
 
 // const DATABASE_CONFIG = {
 //   dialect: 'postgres',
@@ -32,7 +32,9 @@ const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
 // };
 
 // Create a Sequelize instance using the connection string
-const sequelize = new Sequelize(DATABASE_URL, DATABASE_CONFIG);
+
+// const sequelize = new Sequelize(DATABASE_URL, DATABASE_CONFIG);
+const sequelize = new Sequelize(DATABASE_URL);
 
 // Below code is currently commented out. If uncommented, it would hash passwords before creating user entries in the database
 // usersModel.beforeCreate(async user => {
