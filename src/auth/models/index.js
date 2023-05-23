@@ -1,24 +1,10 @@
 'use strict';
 
 require('dotenv').config();
-
-// Import necessary modules and libraries
-const { Sequelize, DataTypes } = require('sequelize'); // Import Sequelize ORM
+const { Sequelize, DataTypes } = require('sequelize');
 const userSchema = require('./users.js');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../../config/config.json')[env]; // Replace with your actual config file path
 
-// Define connection string, defaulting to in-memory database for lack of a defined DATABASE_URL
-let DATABASE_URL;
-if (process.env.NODE_ENV === 'test') {
-  DATABASE_URL = 'sqlite::memory';
-} else if (process.env.NODE_ENV === 'development') {
-  DATABASE_URL = `postgres://${config.username}:${config.password}@${config.host}:${config.port}/${config.database}`;
-} else {
-  DATABASE_URL = process.env.DATABASE_URL;
-}
-
-console.log('DATABASE_URL:', DATABASE_URL);
+const DATABASE_URL = process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development' ? 'sqlite::memory' : process.env.DATABASE_URL;
 
 const sequelize = new Sequelize(DATABASE_URL, {
   logging: false,
@@ -30,10 +16,69 @@ const sequelize = new Sequelize(DATABASE_URL, {
   },
 });
 
+// Test the connection to the database
+(async () => {
+  try {
+    await sequelize.authenticate();
+    if (process.env.NODE_ENV !== 'test') {
+      console.log('Connection to the database has been established successfully.');
+    }
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+})();
+
+
 module.exports = {
   db: sequelize,
   users: userSchema(sequelize, DataTypes),
 };
+
+// 'use strict';
+
+// require('dotenv').config();
+
+// // Import necessary modules and libraries
+// const { Sequelize, DataTypes } = require('sequelize');
+// const userSchema = require('./users.js');
+// const env = process.env.NODE_ENV || 'development';
+// const config = require('../../../config/config.json')[env];
+
+// let DATABASE_URL;
+// if (process.env.NODE_ENV === 'test') {
+//   DATABASE_URL = 'sqlite::memory';
+// } else if (process.env.NODE_ENV === 'development') {
+//   DATABASE_URL = `postgres://${config.username}:${config.password}@${config.host}:${config.port}/${config.database}`;
+// } else {
+//   DATABASE_URL = process.env.DATABASE_URL;
+// }
+
+// console.log('DATABASE_URL:', DATABASE_URL);
+
+// const sequelize = new Sequelize(DATABASE_URL, {
+//   logging: false,
+//   dialectOptions: {
+//     ssl: {
+//       require: true,
+//       rejectUnauthorized: false,
+//     },
+//   },
+// });
+
+// // Test the connection to the database
+// (async () => {
+//   try {
+//     await sequelize.authenticate();
+//     console.log('Connection to the database has been established successfully.');
+//   } catch (error) {
+//     console.error('Unable to connect to the database:', error);
+//   }
+// })();
+
+// module.exports = {
+//   db: sequelize,
+//   users: userSchema(sequelize, DataTypes),
+// };
 
 // 'use strict'
 
@@ -84,3 +129,26 @@ module.exports = {
 //   db: sequelize,
 //   users: userSchema(sequelize, DataTypes),
 // }
+// 'use strict';
+
+// require('dotenv').config();
+// const { Sequelize, DataTypes } = require('sequelize');
+// const userSchema = require('./users.js');
+
+// const DATABASE_URL = process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development' ? 'sqlite::memory' : process.env.DATABASE_URL;
+
+// const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
+//   dialectOptions: {
+//     ssl: {
+//       require: true,
+//       rejectUnauthorized: false,
+//     }
+//   }
+// } : {};
+
+// const sequelize = new Sequelize(DATABASE_URL, DATABASE_CONFIG);
+
+// module.exports = {
+//   db: sequelize,
+//   users: userSchema(sequelize, DataTypes),
+// };

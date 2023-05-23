@@ -1,11 +1,8 @@
-// Import necessary libraries
 const request = require('supertest');
 const express = require('express');
-const logger = require('../../src/middleware/logger'); // path to your logger file
-const jestMock = require('jest-mock');
+const logger = require('../../../../src/middleware/logger');
 
 describe('Logger Middleware', () => {
-
   let app;
   let consoleSpy;
 
@@ -20,7 +17,7 @@ describe('Logger Middleware', () => {
     });
 
     // Create a spy on console.log
-    consoleSpy = jest.spyOn(console, 'log');
+    consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -32,6 +29,6 @@ describe('Logger Middleware', () => {
     const response = await request(app).get('/test');
 
     // Assert that the logger called console.log with the correct message
-    expect(consoleSpy).toHaveBeenCalledWith("Received a GET request on /test");
+    expect(consoleSpy).toHaveBeenCalledWith('GET /test');
   });
 });
