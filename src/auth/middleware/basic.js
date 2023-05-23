@@ -6,12 +6,16 @@ const base64 = require('base-64');
 // Import the users model from the models directory
 const { users } = require('../models/index.js');
 
-// Export a middleware function for basic authentication
-module.exports = async (req, res, next) => {
 
+// Export a middleware function for basic authentication
+const basicAuth = async (req, res, next) => {
+  const _authError = () => {
+    res.status(401).send('Authentication Required');
+  }
   // If no authorization header is present on the request, return an authentication error
   if (!req.headers.authorization) { 
-    return _authError(); 
+    // Return a 403 error
+    return _authError();
   }
 
   // Extract the credentials from the authorization header
@@ -32,3 +36,6 @@ module.exports = async (req, res, next) => {
     res.status(403).send('Invalid Login');
   }
 }
+
+// Export the middleware function
+module.exports = basicAuth;
