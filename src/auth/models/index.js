@@ -20,21 +20,22 @@ const DATABASE_URL = process.env.NODE_ENV === 'test' || process.env.NODE_ENV ===
 //   }
 // } : {};
 
-// const DATABASE_CONFIG = {
-//   dialect: 'postgres',
-//   dialectOptions: {
-//     ssl: {
-//       require: true,
-//       rejectUnauthorized: false
-//     }
-//   },
-//   logging: false
-// };
+const DATABASE_CONFIG = {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  },
+  logging: false
+};
 
 // Create a Sequelize instance using the connection string
+console.log('DATABASE_URL:', DATABASE_URL);
 
-// const sequelize = new Sequelize(DATABASE_URL, DATABASE_CONFIG);
-const sequelize = new Sequelize(DATABASE_URL);
+
+const sequelize = new Sequelize(DATABASE_URL, DATABASE_CONFIG);
+// console.log('DATABASE_URL:', sequelize);
 
 // Below code is currently commented out. If uncommented, it would hash passwords before creating user entries in the database
 // usersModel.beforeCreate(async user => {
