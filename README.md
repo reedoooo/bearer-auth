@@ -4,25 +4,25 @@ Code Fellows - Code 401 - Class 07 Lab
 
 - server deploy:
 
-  - [BasicDeploy](https://basic-auth-odlm.onrender.com/)
+  - [BasicDeploy](https://bearer-auth-cjlh.onrender.com)
 
 - Github Actions:
 
-  - [Actions](https://github.com/reedoooo/basic-auth/actions)
+  - [Actions](https://github.com/reedoooo/bearer-auth/actions)
 
 - Pull Requests:
 
-  - [PRS](https://github.com/reedoooo/basic-auth/pulls)
+  - [PRS](https://github.com/reedoooo/bearer-auth/pulls)
 
 ## Server
 
-URL: https://basic-auth-odlm.onrender.com/
+URL: https://bearer-auth-cjlh.onrender.com
 
 Endpoint: /signup
 Endpoint: /signin
 Endpoint: /login
 
-Example: https://basic-auth-odlm.onrender.com/signup
+Example: https://bearer-auth-cjlh.onrender.com/signup
 
 ## UML Architecture
 

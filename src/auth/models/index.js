@@ -4,16 +4,14 @@ require('dotenv').config();
 
 // Import necessary modules and libraries
 const { Sequelize, DataTypes } = require('sequelize'); // Import Sequelize ORM
-
 const userSchema = require('./users.js');
-
 
 // Define connection string, defaulting to in-memory database for lack of a defined DATABASE_URL
 const DATABASE_URL = process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development' ? 'sqlite::memory' : process.env.DATABASE_URL;
 
 // Define database configuration object, which will be used to configure the Sequelize instance
 const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
-  dialect: 'postgres',
+  // dialect: 'postgres',
   dialectOptions: {
     ssl: {
       require: true,
@@ -21,6 +19,7 @@ const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
     }
   }
 } : {};
+
 // const DATABASE_CONFIG = {
 //   dialect: 'postgres',
 //   dialectOptions: {
@@ -42,8 +41,6 @@ const sequelize = new Sequelize(DATABASE_URL, DATABASE_CONFIG);
 
 // Export sequelize instance and defined models for further use
 module.exports = {
-
   db: sequelize,
   users: userSchema(sequelize, DataTypes),
-
 }
